@@ -6,16 +6,11 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 14:07:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/03/17 02:04:17 by slammari         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:35:58 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "btc.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <ctime>
-
+#include "BitcoinExchange.hpp"
 
 // Define constructor to read bitcoin price history from CSV file
 Btc::Btc(const std::string &history_file_path)
