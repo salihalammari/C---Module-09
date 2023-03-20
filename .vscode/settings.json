@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "stack": "cpp",
+    "ratio": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
+}

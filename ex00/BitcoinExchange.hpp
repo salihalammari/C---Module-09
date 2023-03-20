@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sayar <sayar@student.42.fr>                +#+  +:+       +#+        */
+/*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 14:07:10 by slammari          #+#    #+#             */
-/*   Updated: 2023/03/18 20:53:39 by sayar            ###   ########.fr       */
+/*   Created: 2023/03/17 20:19:41 by slammari          #+#    #+#             */
+/*   Updated: 2023/03/19 21:00:46 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
@@ -18,7 +19,6 @@
 #include <map>
 #include <fstream>
 #include <sstream>
-#include <ctime>
 
 class Btc
 { 

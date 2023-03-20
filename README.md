@@ -1,4 +1,4 @@
-# CPP Module 09
+#CPP Module 09
 
 ####I thought the series of cpp modules was over, but I was stuck.
 <p> You must use at least one container for each exercise with the exception of exercise 02 which requires the use of two containers.</p>
@@ -83,9 +83,30 @@ Error: could not open file.
 <p>Error: too large a number.</p>
 <p>$&gt;</p>
 
-
 💡 Warning
 
 The container(s) you use to validate this exercise will no longer be usable for the rest of this module.
 
+
+#ex01
+
+####Before we get into it, RPN (Reverse Polish Notation)?
+
+The calculation method (which we commonly use) in the image above is called the standard arithmetic method, infix notation.
+
+That is, if in the image above 2 + 2 x 2is written as RPN, 2 2 * 2 +it is .
+
+RPNs help reduce errors in complex calculations by eliminating the need for parentheses and not having to worry about precedence, which is said to be particularly useful for computer programming and calculators.
+
+Anyway, this is called reverse Polish notation (RPN) or postfix notation .
+
+###subject
+
+You must create a program with these constraints:
+• The program name is RPN.
+• Your program must take an inverted Polish mathematical expression as an argument.
+• The numbers used in this operation and passed as arguments will always be less than 10. The calculation itself but also the result do not take into account this rule.
+• Your program must process this expression and output the correct result on the standard output.
+• If an error occurs during the execution of the program an error message should be displayed on the standard output.
+• Your program must be able to handle operations with these tokens: "+ - / *". You must use at least one container in your code to validate this exercise.
 
