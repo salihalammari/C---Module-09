@@ -13,10 +13,22 @@
 #include "RPN.hpp"
 
 
-int main() 
+int main(int arc, char **arv) 
 {
-    std::string expr = "5 3 2 * +";
-    double result = calculateRPN(expr);
-    std::cout << "Result: " << result << std::endl;
-    return 0;
+    if (arc != 2)
+        std::cerr << "need more param" << std::endl;
+    std::stack<int> _stack;
+    std::string value = arv[1];
+    for (int i = 0; value[i] != '\0' ; ++i)
+    {
+        char value_input = value[i];
+        if (value_input == ' ')
+            continue;
+        if (check_input(value_input))
+            std::cerr<<"Error"<<std::endl;
+        if (issignoperator(value_input))
+        {
+            
+        }
+    }
 }

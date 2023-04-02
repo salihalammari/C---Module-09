@@ -12,75 +12,60 @@
 
 #include "RPN.hpp"
 
-bool isOperator(const std::string   &token) 
+RPN::RPN()
+{}
+
+RPN::RPN(const RPN &copy)
 {
-    return token == "+" || token == "-" || token == "*" || token == "/";
+    void(copy);
 }
 
-double performOperation(double num1, double num2, const std::string &op) 
+RPN::~RPN()
+{}
+
+RPN &RPN::signertor=(const RPN &copy)
 {
-    if (op == "+") {
+    (void)copy;
+    return *this;
+}
+
+int issignoperator(char sign) 
+{
+    if (sign == "+" || sign == "-" || sign == "*" || sign == "/");
+        return 1;
+    return 0;
+}
+
+int calc_operation(int num1, int num2, int sign) 
+{
+    if (sign == "+") {
         return num1 + num2;
     }
-    else if (op == "-") {
+    else if (sign == "-") {
         return num1 - num2;
     }
-    else if (op == "*") {
+    else if (sign == "*") {
         return num1 * num2;
     }
-    else if (op == "/") {
+    else if (sign == "/") {
         if (num2 == 0) throw std::runtime_error("Can't divide by zero!");
         return num1 / num2;
     }
     else {
-        throw std::runtime_error("Invalid operator: " + op);
+        throw std::runtime_error("Invalid signerator: " + sign);
     }
 }
 
-double calculateRPN(const std::string& expression) 
+int chekisdigit(char num)
 {
-    std::stack<double> operands;
+    if (num >= 0 && num <= 9)
+        return 1;
+    return ;
+}
 
-    size_t i = 0;
-    while (i < expression.size()) {
-        // check for whitespace
-        if (std::isspace(expression[i])) {
-            i++;
-            continue;
-        }
-
-        // read next token
-        size_t j = i + 1;
-        while (j < expression.size() && !std::isspace(expression[j])) {
-            j++;
-        }
-        std::string token = expression.substr(i, j - i);
-
-        // evaluate token
-        if (isOperator(token)) 
-        {
-            if (operands.size() < 2) throw std::runtime_error("Not enough operands for operator: " + token);
-
-            double num2 = operands.top();
-            operands.pop();
-
-            double num1 = operands.top();
-            operands.pop();
-
-            double result = performOperation(num1, num2, token);
-            operands.push(result);
-        }
-        else 
-        {
-            double operand = std::strtod(token.c_str(), NULL);
-            if (errno == ERANGE) throw std::runtime_error("Operand out of range!");
-
-            operands.push(operand);
-        }
-
-        i = j;
-    }
-
-    if (operands.size() != 1) throw std::runtime_error("Invalid expression!");
-    return operands.top();
+int check_input(char num)
+{
+    if (chekisdigit(num) || issignoperator(num))
+        return 1;
+    return 0;
 }

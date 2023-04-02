@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RNP.hpp                                            :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,21 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RPN_HPP
-#define RPN_HPP
+#ifndef RPN
+# define RPN
 
 #include <stack>
-#include <string>
+#include <iostream>
+#include <cstdlib>
 
-class RPNCalculator {
-public:
-    RPNCalculator();
-    bool isOperator(const std::string   &token);
-    void push(double num);
-    double operate(char op);
-    bool empty() const;
-private:
-    std::stack<double> m_nums;
+class RPN
+{
+  private:
+    RPN();
+    RPN(const RPN   &copy);
+    ~RPN();
+    RPN &operator=(const RPN    &copy);
+  
+  public:
+    
+
 };
 
 #endif
