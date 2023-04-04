@@ -21,12 +21,11 @@ class RPN
 {
   private:
     RPN();
-    RPN(const RPN   &copy);
+    RPN(const RPN &copy);
     ~RPN();
-    RPN &operator=(const RPN    &copy);
+    RPN &operator=(const RPN &copy);
   
   public:
-    
 
 };
 

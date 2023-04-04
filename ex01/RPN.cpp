@@ -17,55 +17,15 @@ RPN::RPN()
 
 RPN::RPN(const RPN &copy)
 {
-    void(copy);
+    (void)copy;
 }
 
 RPN::~RPN()
 {}
 
-RPN &RPN::signertor=(const RPN &copy)
+RPN &RPN::operator=(const RPN &copy)
 {
     (void)copy;
     return *this;
 }
 
-int issignoperator(char sign) 
-{
-    if (sign == "+" || sign == "-" || sign == "*" || sign == "/");
-        return 1;
-    return 0;
-}
-
-int calc_operation(int num1, int num2, int sign) 
-{
-    if (sign == "+") {
-        return num1 + num2;
-    }
-    else if (sign == "-") {
-        return num1 - num2;
-    }
-    else if (sign == "*") {
-        return num1 * num2;
-    }
-    else if (sign == "/") {
-        if (num2 == 0) throw std::runtime_error("Can't divide by zero!");
-        return num1 / num2;
-    }
-    else {
-        throw std::runtime_error("Invalid signerator: " + sign);
-    }
-}
-
-int chekisdigit(char num)
-{
-    if (num >= 0 && num <= 9)
-        return 1;
-    return ;
-}
-
-int check_input(char num)
-{
-    if (chekisdigit(num) || issignoperator(num))
-        return 1;
-    return 0;
-}
