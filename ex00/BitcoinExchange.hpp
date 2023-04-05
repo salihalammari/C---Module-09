@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
@@ -21,20 +20,12 @@
 #include <sstream>
 
 class Btc
-{ 
+{
     private:
-        static time_t parse_date(const std::string &date_str);
-        std::map<time_t, float> bitcoin_price_;
-        std::map<time_t, float> added_values_;
+        std::map<std::string, float> data_betcoin;
     public:
-        Btc();
-        ~Btc(void);
-        Btc(const std::string &history_file_path);
-        
-        void add_value(const std::string &date_str, float value);
-        void evaluate() const;
-        
-   
+        void parser(const char *name);
+        void parse_map(std::string data);
     
 };
 

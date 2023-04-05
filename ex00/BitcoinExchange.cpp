@@ -12,52 +12,34 @@
 
 #include "BitcoinExchange.hpp"
 
-// Define constructor to read bitcoin price history from CSV file
-Btc::Btc(const std::string &history_file_path)
+void Btc::parse_map(std::string data)
 {
-    std::ifstream bitcoin_file(history_file_path);
-    if (bitcoin_file) {
-        std::string line;
-        while (getline(bitcoin_file, line)) 
-        {
-            std::stringstream ss(line);
-            std::string date_str, price_str;
-            getline(ss, date_str, ',');
-            getline(ss, price_str);
-            time_t date = parse_date(date_str);
-            double price = stod(price_str);
-            bitcoin_prices_[date] = price;
-        }
-        bitcoin_file.close();
-    }
+    std::string date = data.substr(0, data.find(','));
+    //std::cout << date << std::endl;
+    std::string value = data.substr(data.find(',') + 1, data.length());
+    //std::cout << value << std::endl;   
+    data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value)));
+     //2009-01-02,0
 }
-
-// Define function to add a date/value pair to evaluate
-void Btc::add_value(const std::string &date_str, double value) {
-    time_t date = parse_date(date_str);
-    added_values_[date] = value;
-}
-
-// Define function to evaluate the bitcoin prices for all added date/value pairs
-void Btc::evaluate() const 
+void Btc::parser(const char *name)
 {
-    for (const auto& [date, value] : added_values_) 
+    std::ifstream namefile;
+    std::string line;
+    
+    namefile.open(name, std::ios::in);
+    if (namefile.is_open())
     {
-        auto bitcoin_price_it = bitcoin_prices_.find(date);
-        if (bitcoin_price_it != bitcoin_prices_.end()) {
-            double price = bitcoin_price_it->second;
-            double bitcoin_amount = value / price;
-            std::cout << "On " << ctime(&date) << ", " << value << " USD is worth " << bitcoin_amount << " BTC" << std::endl;
-        } else {
-            std::cout << "No data for " << ctime(&date) << std::endl;
+        //std::cout << "isopen" << std::endl;
+        while (!namefile.eof())
+        {
+            std::getline(namefile, line);
+           // std::cout << line << std::endl;
+           if (line != "date,exchange_rate")
+           {
+                parse_map(line);
+
+           }
         }
     }
-}
-
-// Define helper function to parse date from string
-time_t Btc::parse_date(const std::string &date_str) 
-{
-    struct tm tm = {0};
-    strptime(date_str.c_str(), "%Y-%m-%d", &tm);
-    return mktime(&tm);
+    
 }
