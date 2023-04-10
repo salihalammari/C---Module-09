@@ -21,6 +21,7 @@ void Btc::parse_map(std::string data)
     data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value)));
      //2009-01-02,0
 }
+
 void Btc::parser(const char *name)
 {
     std::ifstream namefile;
@@ -42,4 +43,34 @@ void Btc::parser(const char *name)
         }
     }
     
+}
+
+
+#include "BitcoinExchange.hpp"
+
+BitcoinExchange::BitcoinExchange()
+{
+}
+
+BitcoinExchange::BitcoinExchange( const BitcoinExchange & src )
+{
+}
+
+BitcoinExchange::~BitcoinExchange()
+{
+}
+
+BitcoinExchange &BitcoinExchange::operator=( BitcoinExchange const & rhs )
+{
+	if ( this != &rhs )
+	{
+		this->_value = rhs.getValue();
+	}
+	return *this;
+}
+
+std::ostream &operator<<( std::ostream & o, BitcoinExchange const & i )
+{
+	o << "Value = " << i.getValue();
+	return o;
 }

@@ -10,23 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
+// #ifndef BITCOINEXCHANGE_HPP
+// #define BITCOINEXCHANGE_HPP
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <fstream>
-#include <sstream>
+// #include <iostream>
+// #include <string>
+// #include <map>
+// #include <fstream>
+// #include <sstream>
 
-class Btc
-{
-    private:
-        std::map<std::string, float> data_betcoin;
-    public:
-        void parser(const char *name);
-        void parse_map(std::string data);
+// class Btc
+// {
+//     private:
+//         std::map<std::string, float> data_betcoin;
+//     public:
+//         void parser(const char *name);
+//         void parse_map(std::string data);
     
+// };
+
+// #endif
+
+#ifndef BITCOINEXCHANGE_HPP
+# define BITCOINEXCHANGE_HPP
+
+# include <iostream>
+# include <string>
+
+class BitcoinExchange
+{
+
+	public:
+
+		BitcoinExchange();
+		BitcoinExchange( BitcoinExchange const & src );
+		~BitcoinExchange();
+
+		BitcoinExchange &operator=( BitcoinExchange const & rhs );
+
+	private:
+
 };
 
-#endif
+std::ostream &operator<<( std::ostream & o, BitcoinExchange const & i );
+
+#endif 
