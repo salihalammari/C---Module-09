@@ -25,10 +25,10 @@ class PmergeMe {
     private:
         std::vector<int> _vertor;
 
-std::vector<int> mergeSort(std::vector1<int> &vector, std::vector2<int> &vector) const;
-std::deque<int> mergeSort(std::deque1<int> &deque, std::deque2<int> &deque) const;
-std::vector<int> insertionSort(std::vector<int> &vector) const;
-std::deque<int> insertionSort(std::deque<int> &deque) const;
+    std::vector<int> mergeSort(std::vector1<int> &vector, std::vector2<int> &vector) const;
+    std::deque<int> mergeSort(std::deque1<int> &deque, std::deque2<int> &deque) const;
+    std::vector<int> insertionSort(std::vector<int> &vector) const;
+    std::deque<int> insertionSort(std::deque<int> &deque) const;
 
     public:
         PmergeMe();
@@ -38,11 +38,11 @@ std::deque<int> insertionSort(std::deque<int> &deque) const;
         ~PmergeMe();
         static void mergeInsertSort(std::vector<int>& sequence);
     
-    std::vector<int> &getvector() {return _vector; }
-    std::vector<int> &getvector() const {return _vector; }
+        std::vector<int> &getvector() { return _vector; }
+        const std::vector<int> &getvector() const { return _vector; }
 
-    std::deque<int> mergeInsertSort(std::deque<int> &deque) const;
-    std::vector<int> mergeInsertSort(std::vector<int> &vector) const;
+        std::deque<int> mergeInsertSort(std::deque<int> &deque) const;
+        std::vector<int> mergeInsertSort(std::vector<int> &vector) const;
 
 };
 

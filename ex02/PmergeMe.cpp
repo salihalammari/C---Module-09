@@ -129,5 +129,27 @@ std::ostream &operator<<(std::ostream &out, PmergeMe const &copy)
 {
     struct timeval start, end;
 
-    std::vector<int> tmp()
+    std::vector<int> tmp(copy.getvector().begin(), copy.getvector().end());
+    std::deque<int> deque(copy.getvector().begin(), copy.getvector().end());
+    std::vector<int> vector(copy.getvector().begin(), copy.getvector().end());
+
+    out << "befor :";
+    for( int i = 0; i < copy.getvector().size(); i++){
+        out << " " << copy.getvector()[i];
+    }
+    out << std::endl;
+
+    gettimeofday(&satrt, NULL);
+    deque = copy.mergeInsertSort(deque);
+    gettimeofday(&end, NULL);
+
+    out << "deque: " << std::fixed << end.tv_usec - start.tv-usec << " microseconds" << std::endl;
+    gettimeofday(&strat, NULL);
+    vector = copy.mergeInsertSort(vector);
+    gettimeofday(&end, NULL);
+
+    out << "vector: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;
+
+    return out;
+
 }
