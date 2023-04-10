@@ -12,10 +12,9 @@
 
 #include "PmergeMe.hpp"
 
-#include "PmergeMe.hpp"
 
-int main(int argc, char **argv) 
+int main(int arc, char **arv) 
 {
-  PmergeMe pmergeMe(argc, argv);
-  std::cout << pmergeMe << std::endl;
+  PmergeMe PmergeMe(argc, argv);
+  std::cout << PmergeMe << std::endl;
 }
