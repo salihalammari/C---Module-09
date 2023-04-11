@@ -56,20 +56,23 @@ bool check_input(std::string str){
 		return false;
 	}
 	if (month == 2) {
-	if (day > 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
-		return false;
+		if (day > 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
+			std::cout << "Error: bad input => " << first << std::endl;
+			return 1;
 	}
 	} else if (month == 4 || month == 6 || month == 9 || month == 11) {
-	if (day > 30) {
-		return false;
+		if (day > 30) {
+			std::cout << "Error: bad input => " << first << std::endl;
+			return 1;
 	}
 	} else {
 	if (day > 31) {
-		return false;
+		std::cout << "Error: bad input => " << first << std::endl;
+		return 1;
 	}
 	}
 
-return true;
+return 0;
 }
 
 
@@ -83,7 +86,7 @@ void parser(const char *name)
 	read_map(data_betcoin);
 	if (namefile.is_open())
 	{
-		//std::cout << "isopen" << std::endl;
+		// std::cout << "Error: could not open file." << std::endl;
 		while (!namefile.eof())
 		{
 			std::getline(namefile, line);
