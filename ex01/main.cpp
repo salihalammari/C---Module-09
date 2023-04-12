@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 21:01:06 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/08 01:40:56 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:13:30 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int check (std::string inp){
                     if (inp[i] != '*')
                         if (inp[i] != '/')
                             if (inp[i] != ' ')
-                                return (EXIT_FAILURE);
+                                return (1);
     }
-    return (EXIT_SUCCESS);
+    return (0);
 }
 
 
@@ -65,9 +65,9 @@ int main(int arc, char **av)
         std::cerr << "need more param" << std::endl;   
     else{
         //func 
-        if (check(av[1]) == EXIT_FAILURE){
+        if (check(av[1]) == 1){
             std::cerr << "error" << std::endl;
-            return (EXIT_FAILURE);
+            return (1);
         }
         std::stack<int> _stack;
         std::string value = av[1];
@@ -80,7 +80,10 @@ int main(int arc, char **av)
             {
                 int a, b;
                 if (_stack.size() < 2)
+                {
                     std::cerr << "Error" << std::endl;
+                    exit(1);
+                }
                 a = _stack.top(); _stack.pop();
                 b = _stack.top(); _stack.pop();
                 _stack.push(calc_operation(b,a, value_input));

@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:05 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/01 02:28:30 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:15:27 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 int main(int arc, char **arv) 
 {
-  PmergeMe PmergeMe(argc, argv);
+  PmergeMe PmergeMe(arc, arv);
   std::cout << PmergeMe << std::endl;
 }

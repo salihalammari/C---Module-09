@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:09 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/01 02:29:15 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/11 04:46:22 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ class PmergeMe {
     private:
         std::vector<int> _vertor;
 
-    std::vector<int> mergeSort(std::vector1<int> &vector, std::vector2<int> &vector) const;
-    std::deque<int> mergeSort(std::deque1<int> &deque, std::deque2<int> &deque) const;
-    std::vector<int> insertionSort(std::vector<int> &vector) const;
-    std::deque<int> insertionSort(std::deque<int> &deque) const;
+        std::vector<int> mergeSort(std::vector<int> &vector1, std::vector<int> &vector2) const;
+        std::deque<int> mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const;
+        std::vector<int> insertionSort(std::vector<int> &vector) const;
+        std::deque<int> insertionSort(std::deque<int> &deque) const;
 
     public:
         PmergeMe();
@@ -36,7 +36,6 @@ class PmergeMe {
         PmergeMe(PmergeMe const &src);
         PmergeMe &operator=(PmergeMe const &copy);
         ~PmergeMe();
-        static void mergeInsertSort(std::vector<int>& sequence);
     
         std::vector<int> &getvector() { return _vector; }
         const std::vector<int> &getvector() const { return _vector; }
