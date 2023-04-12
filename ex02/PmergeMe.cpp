@@ -6,26 +6,30 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/11 04:53:38 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/12 02:20:39 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-
 PmergeMe::PmergeMe() {}
 PmergeMe::~PmergeMe() {}
 PmergeMe::PmergeMe(int arc, char **arv)
 {
-    for(int i = 1, i < arc, i++)
+    for(int i = 1; i < arc; i++)
     {
         _vector.push_back(std::atoi(arv[i]));
     }
 }
 
-PmergeMe::PmergeMe &operator=(PmergeMe const &copy){
-    if (this != &copy)
-    return *this;
+PmergeMe::PmergeMe(PmergeMe const &src)
+{
+    (void)src;
+}
+
+PmergeMe& PmergeMe::operator=(const PmergeMe  &copy){
+    (void)copy;
+        return *this;
 }
 
 std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
@@ -40,19 +44,20 @@ std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
     return mergeSort(vector1, vector2);
 }
 
-std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque) const
+std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque)
 {
-    if (deque.size() <=10)
+    if (deque.size() <= 10)
         return mergeInsertSort(deque);
     std::deque<int> deque1(deque.begin(), deque.begin() + deque.size() / 2);
     std::deque<int> deque2(deque.begin() + deque.size() / 2, deque.end());
 
     deque1 = mergeInsertSort(deque1);
     deque2 = mergeInsertSort(deque2);
-    return mergeSort(deque1, deque2);
+  
+    return  mergeSort(deque1, deque2);
 }
 
-std::vector<int> PmergeMe::mergeSort(std::vector<int> &vector1, std::vector<int> &vector2)
+std::vector<int> PmergeMe::mergeSort(std::vector<int> &vector1, std::vector<int> &vector2)  const
 {
     std::vector<int> vector;
     while (!vector1.empty() && !vector2.empty()){
@@ -99,7 +104,7 @@ std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &de
 
 std::vector<int> PmergeMe::insertionSort(std::vector<int> &vector) const
 {
-      for (int i = 1; i < vector.size(); i++){
+      for (size_t i = 1; i < vector.size(); i++){
         int j = i;
         while (j > 0 && vector[j - 1] > vector[j]){
             int tmp = vector[j];
@@ -109,11 +114,11 @@ std::vector<int> PmergeMe::insertionSort(std::vector<int> &vector) const
         }
     }
     return vector;
-
 }
+
 std::deque<int> PmergeMe::insertionSort(std::deque<int> &deque) const
 {
-    for (int i = 1; i < deque.size(); i++){
+    for (size_t i = 1; i < deque.size(); i++){
         int j = i;
         while (j > 0 && deque[j - 1] > deque[j]){
             int tmp = deque[j];
@@ -134,7 +139,7 @@ std::ostream &operator<<(std::ostream &out, PmergeMe const &copy)
     std::vector<int> vector(copy.getvector().begin(), copy.getvector().end());
 
     out << "befor :";
-    for( int i = 0; i < copy.getvector().size(); i++){
+    for( size_t i = 0; i < copy.getvector().size(); i++){
         out << " " << copy.getvector()[i];
     }
     out << std::endl;
