@@ -24,12 +24,15 @@ PmergeMe::PmergeMe(int arc, char **arv)
 
 PmergeMe::PmergeMe(PmergeMe const &src)
 {
-    (void)src;
+    *this = src;
+    return ;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe  &copy){
-    (void)copy;
-        return *this;
+    if(this != copy){
+
+    }
+    return *this;
 }
 
 std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
