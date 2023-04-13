@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
+#include <deque>
+#include <iostream>
+#include <string>
+#include <vector>
 #include "PmergeMe.hpp"
 
 

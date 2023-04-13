@@ -26,7 +26,6 @@ class PmergeMe {
         std::vector<int> _vector;
 
         std::vector<int> mergeSort(std::vector<int> &vector1, std::vector<int> &vector2) const;
-        // std::deque<int> mergeSort(std::deque<int> &deque1, std::deque<int> &deque2);
         std::deque<int> mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const;
         std::vector<int> insertionSort(std::vector<int> &vector) const;
         std::deque<int> insertionSort(std::deque<int> &deque) const;
@@ -35,7 +34,7 @@ class PmergeMe {
         PmergeMe();
         PmergeMe(int arc, char **arv);
         PmergeMe(PmergeMe const &src);
-        PmergeMe& operator=(const PmergeMe  &copy);
+        PmergeMe& operator=(const PmergeMe  &obj);
         ~PmergeMe();
     
         std::vector<int> &getvector() { return _vector; }
@@ -44,9 +43,6 @@ class PmergeMe {
         std::deque<int> mergeInsertSort(std::deque<int> &deque) const;
         std::vector<int> mergeInsertSort(std::vector<int> &vector) const;
 
-        std::deque<int> mergeInsertSort(std::deque<int> &deque);
-
-        // std::deque<int> mergeInsertSort(std::deque<int> &deque);
 };
 
 std::ostream &operator<<(std::ostream &out, const PmergeMe &obj);
