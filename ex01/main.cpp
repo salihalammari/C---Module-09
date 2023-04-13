@@ -15,7 +15,7 @@
 #include <iostream>
 #include <cstdlib>
 
-int issignoperator(char sign) 
+int sign_operator(char sign) 
 {
     if (sign == '+' || sign == '-' || sign == '*' || sign == '/')
         return 1;
@@ -64,7 +64,6 @@ int main(int arc, char **av)
     if (arc != 2)
         std::cerr << "need more param" << std::endl;   
     else{
-        //func 
         if (check(av[1]) == 1){
             std::cerr << "error" << std::endl;
             return (1);

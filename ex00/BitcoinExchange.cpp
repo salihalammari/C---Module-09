@@ -17,7 +17,6 @@ std::pair<std::string, float> parse_data(std::string data)
 	std::map<std::string, float> data_betcoin;
 	std::string date = data.substr(0, data.find(','));
 	std::string value = data.substr(data.find(',') + 1, data.length());
-	//std::cout << value << std::endl;
 	data_betcoin[date] = std::atof(value.c_str());
 	return make_pair(date, std::atof(value.c_str()));
 	// data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value.c_str())));
@@ -67,10 +66,10 @@ bool isValidPrice(std::string price)
 std::pair<std::string, float> parse_input(std::string data)
 {
 	std::map<std::string, float> data_betcoin;
-	std::string date = data.substr(0, 10);//TODO parcing data
+	std::string date = data.substr(0, 10);
 	if (isValidDate(date))
 		return (std::make_pair("error",0));
-	std::string value = data.substr(data.find('|') + 1, data.length());//TODO parcing price
+	std::string value = data.substr(data.find('|') + 1, data.length());
 	if (isValidPrice(value))
 		return (std::make_pair("error",0));
 	data_betcoin[date] = std::atof(value.c_str());
@@ -85,7 +84,6 @@ void    read_map(std::map<std::string, float> &data_betcoin)
 	namefile.open("data.csv");
 	if (namefile.is_open())
 	{
-		//std::cout << "isopen" << std::endl;
 		while (!namefile.eof())
 		{
 			std::getline(namefile, line);
@@ -106,7 +104,7 @@ bool check_input(std::string str){
 	year = std::atoi(str.substr(0, str.find('-')).c_str());
 	month = std::atoi(str.substr(str.find('-') + 1, 2).c_str());
 	day = std::atoi(str.substr(str.find_last_of('-') + 1, 2).c_str());
-	if ( month < 1 || month > 12 || day < 1 || year < 2009 || year > 2023) {
+	if (year < 0 || month < 1 || month > 12 || day < 1 || day > 31){
 		//std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
 	}
