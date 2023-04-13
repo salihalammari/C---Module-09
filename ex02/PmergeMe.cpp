@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/12 02:20:39 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/12 23:46:02 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ PmergeMe::PmergeMe(PmergeMe const &src)
     return ;
 }
 
-PmergeMe& PmergeMe::operator=(const PmergeMe  &copy){
-    if(this != copy){
-
+PmergeMe& PmergeMe::operator=(const PmergeMe  &obj){
+    if (this != &obj){
     }
     return *this;
 }
+
+// std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque) const
+// {
+//     return std::deque<int>();
+// }
 
 std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
 {
@@ -47,7 +51,7 @@ std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
     return mergeSort(vector1, vector2);
 }
 
-std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque)
+std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque) const
 {
     if (deque.size() <= 10)
         return mergeInsertSort(deque);
@@ -82,6 +86,11 @@ std::vector<int> PmergeMe::mergeSort(std::vector<int> &vector1, std::vector<int>
     }
     return vector;
 }
+
+// std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &deque2)
+// {
+//     return std::deque<int>();
+// }
 
 std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const{
     std::deque<int> deque;
@@ -133,27 +142,27 @@ std::deque<int> PmergeMe::insertionSort(std::deque<int> &deque) const
     return deque;
 }
 
-std::ostream &operator<<(std::ostream &out, PmergeMe const &copy)
+std::ostream &operator<<(std::ostream &out, PmergeMe const &obj)
 {
     struct timeval start, end;
 
-    std::vector<int> tmp(copy.getvector().begin(), copy.getvector().end());
-    std::deque<int> deque(copy.getvector().begin(), copy.getvector().end());
-    std::vector<int> vector(copy.getvector().begin(), copy.getvector().end());
+    std::vector<int> tmp(obj.getvector().begin(), obj.getvector().end());
+    std::deque<int> deque(obj.getvector().begin(), obj.getvector().end());
+    std::vector<int> vector(obj.getvector().begin(), obj.getvector().end());
 
     out << "befor :";
-    for( size_t i = 0; i < copy.getvector().size(); i++){
-        out << " " << copy.getvector()[i];
+    for( size_t i = 0; i < obj.getvector().size(); i++){
+        out << " " << obj.getvector()[i];
     }
     out << std::endl;
 
     gettimeofday(&start, NULL);
-    deque = copy.mergeInsertSort(deque);
+    deque = obj.mergeInsertSort(deque);
     gettimeofday(&end, NULL);
 
     out << "deque: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;
     gettimeofday(&start, NULL);
-    vector = copy.mergeInsertSort(vector);
+    vector = obj.mergeInsertSort(vector);
     gettimeofday(&end, NULL);
 
     out << "vector: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;

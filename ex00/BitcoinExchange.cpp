@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 14:07:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/12 02:45:34 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/13 02:26:42 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ std::pair<std::string, float> parse_data(std::string data)
 {
 	std::map<std::string, float> data_betcoin;
 	std::string date = data.substr(0, data.find(','));
-	//std::cout << date << std::endl;
 	std::string value = data.substr(data.find(',') + 1, data.length());
 	//std::cout << value << std::endl;
 	data_betcoin[date] = std::atof(value.c_str());
 	return make_pair(date, std::atof(value.c_str()));
 	// data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value.c_str())));
-	 //2009-01-02,0
 }
 
 bool isValidDate(std::string str)
@@ -108,24 +106,23 @@ bool check_input(std::string str){
 	year = std::atoi(str.substr(0, str.find('-')).c_str());
 	month = std::atoi(str.substr(str.find('-') + 1, 2).c_str());
 	day = std::atoi(str.substr(str.find_last_of('-') + 1, 2).c_str());
-	// std::cout << year << " " << month << " " << day << std::endl;
-	if (year < 0 || month < 1 || month > 12 || day < 1) {
-		std::cout << "Error: bad input => " << date << std::endl;
+	if ( month < 1 || month > 12 || day < 1 || year < 2009 || year > 2023) {
+		//std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
 	}
 	if (month == 2) {
 		if (day > 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
-			std::cout << "Error: bad input => " << date << std::endl;
+			//std::cout << "Error: bad input => " << date << std::endl;
 			return 1;
 	}
 	} else if (month == 4 || month == 6 || month == 9 || month == 11) {
 		if (day > 30) {
-			std::cout << "Error: bad input => " << date << std::endl;
+			//std::cout << "Error: bad input => " << date << std::endl;
 			return 1;
 	}
 	} else {
 	if (day > 31) {
-		std::cout << "Error: bad input => " << date << std::endl;
+		//std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
 	}
 	}
@@ -136,8 +133,11 @@ return 0;
 float get_exchange(std::string &date, std::map<std::string, float> &data_betcoin)
 {
 	std::map<std::string, float>::iterator it = data_betcoin.lower_bound(date);
-	if (it != data_betcoin.begin() && it->first != date)
-		--it;
+	if (it == data_betcoin.begin() && it->first != date)
+		return 0;
+	if (it != data_betcoin.begin() && it->first != date )
+		it--;
+	
 	return it->second;
 }
 
@@ -155,7 +155,6 @@ void parser(const char *name)
 		while (!namefile.eof())
 		{
 			std::getline(namefile, line);
-		   // std::cout << line << std::endl;
 		   if (line != "date | value" && !line.empty())
 		   {
 				input = parse_input(line);
