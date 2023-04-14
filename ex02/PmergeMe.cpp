@@ -6,14 +6,16 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/12 23:46:02 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/14 05:40:50 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe() {}
+
 PmergeMe::~PmergeMe() {}
+
 PmergeMe::PmergeMe(int arc, char **arv)
 {
     for(int i = 1; i < arc; i++)
@@ -33,11 +35,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe  &obj){
     }
     return *this;
 }
-
-// std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque) const
-// {
-//     return std::deque<int>();
-// }
 
 std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
 {
@@ -87,14 +84,10 @@ std::vector<int> PmergeMe::mergeSort(std::vector<int> &vector1, std::vector<int>
     return vector;
 }
 
-// std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &deque2)
-// {
-//     return std::deque<int>();
-// }
-
 std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const{
     std::deque<int> deque;
-    while (!deque1.empty() && !deque1.empty()){
+    while (!deque1.empty() && !deque2.empty()){
+        // deque.push_back(deque1.front() < deque2.front()) ? deque1.pop_front() : deque2.pop_front();
         if (deque1.front() < deque2.front()){
             deque.push_back(deque1.front());
             deque1.pop_front();
@@ -103,6 +96,8 @@ std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &de
             deque2.pop_front();
         }
     }
+    // deque.insert(deque.end(), deque1.begin(), deque1.end());
+    // deque.insert(deque.end(), deque2.begin(), deque2.end());
     while (!deque1.empty()){
         deque.push_back(deque1.front());
         deque1.pop_front();
@@ -119,9 +114,10 @@ std::vector<int> PmergeMe::insertionSort(std::vector<int> &vector) const
       for (size_t i = 1; i < vector.size(); i++){
         int j = i;
         while (j > 0 && vector[j - 1] > vector[j]){
-            int tmp = vector[j];
-            vector[j] = vector[j - 1];
-            vector[j - 1] = tmp;
+            std::swap(vector[j], vector[j - 1]);
+            // int tmp = vector[j];
+            // vector[j] = vector[j - 1];
+            // vector[j - 1] = tmp;
             j--;
         }
     }
@@ -133,10 +129,11 @@ std::deque<int> PmergeMe::insertionSort(std::deque<int> &deque) const
     for (size_t i = 1; i < deque.size(); i++){
         int j = i;
         while (j > 0 && deque[j - 1] > deque[j]){
-            int tmp = deque[j];
-            deque[j] = deque[j - 1];
-            deque[j - 1] = tmp;
-            j--;
+            std::swap(deque[j], deque[j - 1]);
+            // int tmp = deque[j];
+            // deque[j] = deque[j - 1];
+            // deque[j - 1] = tmp;
+            // j--;
         }
     }
     return deque;

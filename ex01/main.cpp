@@ -6,14 +6,12 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 21:01:06 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/10 22:13:30 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/14 01:43:21 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "RPN.hpp"
-#include <stack>
-#include <iostream>
-#include <cstdlib>
+#include "RPN.hpp"
+
 
 int sign_operator(char sign) 
 {
@@ -34,7 +32,10 @@ int calc_operation(int num1, int num2, int sign)
         return num1 * num2;
     }
     else if (sign == '/') {
-        if (num2 == 0) std::cerr << "Can't divide by zero!" << std::endl;
+        if (num2 == 0){
+            std::cerr << "Can't divide by zero!" << std::endl;
+            exit(1);
+        }
         return num1 / num2;
     }
     else {
@@ -57,31 +58,32 @@ int check (std::string inp){
     return (0);
 }
 
-
-
 int main(int arc, char **av) 
 {
+    int cnt = 0;
     if (arc != 2)
         std::cerr << "need more param" << std::endl;   
     else{
         if (check(av[1]) == 1){
-            std::cerr << "error" << std::endl;
+            std::cerr << "error1" << std::endl;
             return (1);
         }
         std::stack<int> _stack;
         std::string value = av[1];
+        
         for (int i = 0; value[i] != '\0' ; ++i)
         {
             char value_input = value[i];
             if (value_input == ' ')
                 continue;
-            if (issignoperator(value_input))
+            cnt++;
+            if (sign_operator(value_input))
             {
                 int a, b;
                 if (_stack.size() < 2)
                 {
-                    std::cerr << "Error" << std::endl;
-                    exit(1);
+                    std::cerr << "Error2" << std::endl;
+                    return (1);
                 }
                 a = _stack.top(); _stack.pop();
                 b = _stack.top(); _stack.pop();
@@ -90,8 +92,10 @@ int main(int arc, char **av)
             else 
                 _stack.push(value_input - '0');
         }
-        if (_stack.size() != 1)
-            std::cerr << "Error" << std::endl;
+        if (_stack.size() != 1 || cnt <= 1){
+            std::cerr << "Error3" << std::endl;
+            return (1);
+        }
         std::cout << _stack.top() << std::endl;
         }
 }
