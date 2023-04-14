@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 14:07:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/13 02:26:42 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/14 03:26:14 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ bool isValidDate(std::string str)
 	year = str.substr(0, str.find('-'));
 	month = str.substr(str.find('-') + 1, 2);
 	day = str.substr(str.find_last_of('-') + 1, 2);
+	if (year.size() != 4)
+		return (std::cout << "Error: bad input => " << date << std::endl, 1);
 	for(size_t i = 0; i < year.size(); i++)
 	{
 		if ((i < 2 && (!isdigit(day[i]) || !isdigit(month[i]))) || !isdigit(year[i]))
@@ -74,7 +76,6 @@ std::pair<std::string, float> parse_input(std::string data)
 		return (std::make_pair("error",0));
 	data_betcoin[date] = std::atof(value.c_str());
 	return std::make_pair(date, std::atof(value.c_str()));
-	// data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value.c_str())));
 }
 
 void    read_map(std::map<std::string, float> &data_betcoin)
@@ -105,22 +106,22 @@ bool check_input(std::string str){
 	month = std::atoi(str.substr(str.find('-') + 1, 2).c_str());
 	day = std::atoi(str.substr(str.find_last_of('-') + 1, 2).c_str());
 	if (year < 0 || month < 1 || month > 12 || day < 1 || day > 31){
-		//std::cout << "Error: bad input => " << date << std::endl;
+		std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
 	}
 	if (month == 2) {
 		if (day > 28 + (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
-			//std::cout << "Error: bad input => " << date << std::endl;
+			std::cout << "Error: bad input => " << date << std::endl;
 			return 1;
 	}
 	} else if (month == 4 || month == 6 || month == 9 || month == 11) {
 		if (day > 30) {
-			//std::cout << "Error: bad input => " << date << std::endl;
+			std::cout << "Error: bad input => " << date << std::endl;
 			return 1;
 	}
 	} else {
 	if (day > 31) {
-		//std::cout << "Error: bad input => " << date << std::endl;
+		std::cout << "Error: bad input => " << date << std::endl;
 		return 1;
 	}
 	}
