@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 14:07:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/14 03:26:14 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/15 05:54:56 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ std::pair<std::string, float> parse_input(std::string data)
 	std::string date = data.substr(0, 10);
 	if (isValidDate(date))
 		return (std::make_pair("error",0));
-	std::string value = data.substr(data.find('|') + 1, data.length());
+	std::string value = data.substr(data.find(" | ") + 3);
+	std::cout <<"{"<<value <<"}"<<std::endl;
+	if(value.empty())
+		print line
 	if (isValidPrice(value))
 		return (std::make_pair("error",0));
 	data_betcoin[date] = std::atof(value.c_str());
@@ -151,9 +154,19 @@ void parser(const char *name)
 	read_map(data_betcoin);
 	if (namefile.is_open())
 	{
+		int i = 0;
+		
 		while (!namefile.eof())
 		{
 			std::getline(namefile, line);
+			if(i == 0)
+			{
+				if(line != "date | value"){
+					std::cout << "Error: head empty" << line << std::endl;
+					return ;
+				}
+				i++;
+			}
 		   if (line != "date | value" && !line.empty())
 		   {
 				input = parse_input(line);
