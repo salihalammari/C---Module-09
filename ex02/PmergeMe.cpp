@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/14 05:40:50 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/15 23:58:18 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ std::vector<int> PmergeMe::mergeInsertSort(std::vector<int> &vector) const
 std::deque<int> PmergeMe::mergeInsertSort(std::deque<int> &deque) const
 {
     if (deque.size() <= 10)
-        return mergeInsertSort(deque);
+        return insertionSort(deque);
     std::deque<int> deque1(deque.begin(), deque.begin() + deque.size() / 2);
     std::deque<int> deque2(deque.begin() + deque.size() / 2, deque.end());
 
     deque1 = mergeInsertSort(deque1);
     deque2 = mergeInsertSort(deque2);
-  
     return  mergeSort(deque1, deque2);
 }
 
@@ -87,7 +86,6 @@ std::vector<int> PmergeMe::mergeSort(std::vector<int> &vector1, std::vector<int>
 std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const{
     std::deque<int> deque;
     while (!deque1.empty() && !deque2.empty()){
-        // deque.push_back(deque1.front() < deque2.front()) ? deque1.pop_front() : deque2.pop_front();
         if (deque1.front() < deque2.front()){
             deque.push_back(deque1.front());
             deque1.pop_front();
@@ -96,8 +94,6 @@ std::deque<int> PmergeMe::mergeSort(std::deque<int> &deque1, std::deque<int> &de
             deque2.pop_front();
         }
     }
-    // deque.insert(deque.end(), deque1.begin(), deque1.end());
-    // deque.insert(deque.end(), deque2.begin(), deque2.end());
     while (!deque1.empty()){
         deque.push_back(deque1.front());
         deque1.pop_front();
@@ -113,11 +109,10 @@ std::vector<int> PmergeMe::insertionSort(std::vector<int> &vector) const
 {
       for (size_t i = 1; i < vector.size(); i++){
         int j = i;
-        while (j > 0 && vector[j - 1] > vector[j]){
-            std::swap(vector[j], vector[j - 1]);
-            // int tmp = vector[j];
-            // vector[j] = vector[j - 1];
-            // vector[j - 1] = tmp;
+        while (j >= 0 && vector[j - 1] > vector[j]){
+            int tmp = vector[j];
+            vector[j] = vector[j - 1];
+            vector[j - 1] = tmp;
             j--;
         }
     }
@@ -127,14 +122,17 @@ std::vector<int> PmergeMe::insertionSort(std::vector<int> &vector) const
 std::deque<int> PmergeMe::insertionSort(std::deque<int> &deque) const
 {
     for (size_t i = 1; i < deque.size(); i++){
-        int j = i;
-        while (j > 0 && deque[j - 1] > deque[j]){
-            std::swap(deque[j], deque[j - 1]);
+        int key = deque[i];
+        int j = i - 1;
+        while (j >= 0 && deque[j] > key){
+            deque[j + 1] = deque[j];
+            // std::swap(deque[j], deque[j - 1]);
             // int tmp = deque[j];
             // deque[j] = deque[j - 1];
             // deque[j - 1] = tmp;
-            // j--;
+            j--;
         }
+        deque[j + 1] = key;
     }
     return deque;
 }
@@ -146,23 +144,39 @@ std::ostream &operator<<(std::ostream &out, PmergeMe const &obj)
     std::vector<int> tmp(obj.getvector().begin(), obj.getvector().end());
     std::deque<int> deque(obj.getvector().begin(), obj.getvector().end());
     std::vector<int> vector(obj.getvector().begin(), obj.getvector().end());
-
-    out << "befor :";
+    // std::deque<int> deque(obj.getvector().begin(), obj.getvector().end());
+    // std::vector<int> vector(deque.begin(), deque.end());
+    
+    // out << "befor :";
+    // for (std::vector<int>::const_iterator it = obj.getvector().begin(); it != obj.getvector().end(); ++it){
+    //     out << " " << *it;
+    // }
     for( size_t i = 0; i < obj.getvector().size(); i++){
         out << " " << obj.getvector()[i];
     }
-    out << std::endl;
+    // out << std::endl;
+    
+    // clock_t start, end;
+    // start = clock();
+    // vector = obj.mergeInsertSort(vector);
+    // end = clock();
+    
+    gettimeofday(&start, NULL);
+    vector = obj.mergeInsertSort(vector);
+    gettimeofday(&end, NULL);
+    // out << "vector: " << static_cast<double>(end - start) / CLOCKS_PER_SEC << " seconds" << std::endl;
+    // start = clock();
+    // deque = obj.mergeInsertSort(deque);
+    // end = clock();
 
+    // out << "deque: " << static_cast<double>(end - start) / CLOCKS_PER_SEC << " seconds" << std::endl;
+
+    out << "vector: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;
     gettimeofday(&start, NULL);
     deque = obj.mergeInsertSort(deque);
     gettimeofday(&end, NULL);
 
     out << "deque: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;
-    gettimeofday(&start, NULL);
-    vector = obj.mergeInsertSort(vector);
-    gettimeofday(&end, NULL);
-
-    out << "vector: " << std::fixed << end.tv_usec - start.tv_usec << " microseconds" << std::endl;
 
     return out;
 }
