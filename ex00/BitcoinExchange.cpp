@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 14:07:07 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/15 05:54:56 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/17 05:23:57 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ std::pair<std::string, float> parse_data(std::string data)
 	std::string value = data.substr(data.find(',') + 1, data.length());
 	data_betcoin[date] = std::atof(value.c_str());
 	return make_pair(date, std::atof(value.c_str()));
-	// data_betcoin.insert(std::pair<std::string, float> (date, std::atof(value.c_str())));
 }
 
 bool isValidDate(std::string str)
@@ -44,20 +43,19 @@ bool isValidDate(std::string str)
 
 bool isValidPrice(std::string price)
 {
-	int Dot = 0,mun = 0;
+	int Dot = 0;
+	
 	for(size_t i = 0; i < price.size(); i++)
 	{
-		if (price[i] == '.')
-			Dot++;
-		else if (price[i] == '-')
-			mun++;
-		else if (!isdigit(price[i]) && price[i] != ' ')
-		{
+		if (i == 0 && (price[i] == '-' || price[i] == '+'));
+		else if(!isdigit(price[i]) && price[i] != '.') {
 			std::cout << "Error: bad input => " << price << std::endl;
 			return 1;
 		}
+		if (price[i] == '.')
+			Dot++;
 	}
-	if (Dot > 1 || mun > 1)
+	if (Dot > 1)
 	{
 			std::cout << "Error: bad input => " << price << std::endl;
 			return 1;
@@ -69,12 +67,20 @@ std::pair<std::string, float> parse_input(std::string data)
 {
 	std::map<std::string, float> data_betcoin;
 	std::string date = data.substr(0, 10);
+	std::string bet = data.substr(10,data.find(" | ") - 3);
+	bet = bet.substr(0,bet.find(" | "));
+	if(!bet.empty())
+	{
+		std::cout << "Error: bad input => " << data << std::endl;
+		return (std::make_pair("error",0));
+	}
 	if (isValidDate(date))
 		return (std::make_pair("error",0));
+	if (data.find("|") == std::string::npos)
+		return (std::make_pair(data,0));
 	std::string value = data.substr(data.find(" | ") + 3);
-	std::cout <<"{"<<value <<"}"<<std::endl;
 	if(value.empty())
-		print line
+		std::cout << value << std::endl;
 	if (isValidPrice(value))
 		return (std::make_pair("error",0));
 	data_betcoin[date] = std::atof(value.c_str());
@@ -128,8 +134,7 @@ bool check_input(std::string str){
 		return 1;
 	}
 	}
-
-return 0;
+	return 0;
 }
 
 float get_exchange(std::string &date, std::map<std::string, float> &data_betcoin)
@@ -165,10 +170,10 @@ void parser(const char *name)
 					std::cout << "Error: head empty" << line << std::endl;
 					return ;
 				}
-				i++;
+				i++;	
 			}
-		   if (line != "date | value" && !line.empty())
-		   {
+			if (line != "date | value" && !line.empty())
+			{
 				input = parse_input(line);
 				if (input.first == "error" || check_input(input.first) )
 					continue;
@@ -181,7 +186,7 @@ void parser(const char *name)
 					float exchange = get_exchange(input.first, data_betcoin);
 					std::cout << input.first << " => "<< input.second << " = " << input.second * exchange << std::endl;
 				}
-		   }
+			}
 		}
 	}
 	else
