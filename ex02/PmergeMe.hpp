@@ -6,7 +6,7 @@
 /*   By: slammari <slammari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:08:09 by slammari          #+#    #+#             */
-/*   Updated: 2023/04/15 20:03:32 by slammari         ###   ########.fr       */
+/*   Updated: 2023/04/16 03:08:24 by slammari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 class PmergeMe {
     private:
         std::vector<int> _vector;
-    private:
-        std::vector<int> mergeSort(std::vector<int> &vector1, std::vector<int> &vector2) const;
-        std::deque<int> mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const;
-        std::vector<int> insertionSort(std::vector<int> &vector) const;
-        std::deque<int> insertionSort(std::deque<int> &deque) const;
-
     public:
         PmergeMe();
         PmergeMe(int arc, char **arv);
@@ -42,7 +36,11 @@ class PmergeMe {
 
         std::deque<int> mergeInsertSort(std::deque<int> &deque) const;
         std::vector<int> mergeInsertSort(std::vector<int> &vector) const;
-
+    private:
+        std::vector<int> mergeSort(std::vector<int> &vector1, std::vector<int> &vector2) const;
+        std::deque<int> mergeSort(std::deque<int> &deque1, std::deque<int> &deque2) const;
+        std::vector<int> insertionSort(std::vector<int> &vector) const;
+        std::deque<int> insertionSort(std::deque<int> &deque) const;
 };
 
 std::ostream &operator<<(std::ostream &out, const PmergeMe &obj);
